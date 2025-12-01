@@ -1,27 +1,39 @@
 #import "Basic";
+#import "File";
+#import "Math";
 
 #load "d01.jai";
 
 main :: () {
     days := (()->(string,string)).[
-        solve_d01
+        d01
     ];
 
     iter :: 20;
 
-    for day : days {
+    context.allocator = temp;
+    for day_fn : days {
+        day_n := it_index + 1;
         acc_time : float64 = 0;
         a : string;
         b : string;
 
         for 1..iter {
             before := current_time_monotonic();
-            a, b = day();
+            a, b = day_fn();
             after := current_time_monotonic();
 
-            ms, _ := to_milliseconds(after - before);
+            if it == 1 {
+                print("d% part_1: % - part_2: % - ", formatInt(day_n, minimum_digits = 2), a, b);
+            }
+
+            us, _ := to_microseconds(after - before);
+            ms := us / 1000.0;
             acc_time += ms;
+
+            reset_temporary_storage();
         }
-        print("d% part_1: % - part_2: % - %ms\n", formatInt(it_index+1, minimum_digits = 2), a, b, acc_time / iter);
+
+        print("%ms\n", acc_time / iter);
     }
 }
