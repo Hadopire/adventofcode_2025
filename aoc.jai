@@ -1,12 +1,17 @@
 #import "Basic";
 #import "File";
 #import "Math";
+#import "Hash_Table";
+#import "Sort";
+#import "IntroSort";
 
 #load "d01.jai";
+#load "d02.jai";
 
 main :: () {
     days := (()->(string,string)).[
-        d01
+        d01,
+        d02
     ];
 
     iter :: 20;
