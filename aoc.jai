@@ -4,14 +4,17 @@
 #import "Hash_Table";
 #import "Sort";
 #import "IntroSort";
+#import "String";
 
 #load "d01.jai";
 #load "d02.jai";
+#load "d03.jai";
 
 main :: () {
     days := (()->(string,string)).[
         d01,
-        d02
+        d02,
+        d03,
     ];
 
     iter :: 20;
