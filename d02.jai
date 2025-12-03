@@ -25,22 +25,18 @@ pow10 :: (exp: s64) -> s64 {
     return 10_000_000_000;
 }
 
-lower_bound :: (array: []s64, n: s64) -> s64 {
-    lo := 0;
-    hi := array.count - 1;
-    idx := array.count;
-
-    while lo <= hi {
-        mid := lo + (hi-lo)/2;
-        if array[mid] >= n {
-            idx = mid;
-            hi = mid - 1;
-        } else {
-            lo = mid + 1;
-        }
+sum_of_repeating_pattern :: (min_value: s64, max_value: s64, length: s64, repeat: s64) -> s64 {
+    base := pow10(length-1);
+    m := 1;
+    for 1..repeat-1 {
+        m = m * base * 10 + 1;
     }
 
-    return idx;
+    a1 := max(base, (min_value+m-1) / m);
+    an := min(base*10-1, max_value / m);
+    n := an - a1 + 1;
+
+    return ((n * (a1 + an)) / 2) * m;
 }
 
 d02 :: () -> string, string {
@@ -48,28 +44,6 @@ d02 :: () -> string, string {
 
     first_gaulois := 0;
     second_gaulois := 0;
-
-    table: Table(s64, bool);
-    numbers: [..] s64;
-    init(*table, 200_000);
-    array_reserve(*numbers, 200_000);
-
-    for b : 0..4 {
-        base := pow10(b);
-        m := base * 10 + 1;
-        while m*base < 10_000_000_000 {
-            for n : base..base*10-1 {
-                value := m * n;
-                _, new := find_or_add(*table, value);
-                if new {
-                    array_add(*numbers, value);
-                }
-            }
-            m = m * 10 * base + 1;
-        }
-    }
-
-    quick_sort(numbers, (a, b) => a-b); 
 
     while (input.count) {
         start, end: s64;
@@ -81,22 +55,31 @@ d02 :: () -> string, string {
 
         d_start := count_digits(start);
         d_end := count_digits(end);
-        for digit : d_start..d_end {
-            if digit % 2 != 0 then continue;
 
-            base := pow10(digit/2-1);
-            for n : base..base*10-1 {
-                value := (base * 10 + 1) * n;
-                if end <= value then break;
-                if start <= value then first_gaulois += value;
+        // part 1
+        for length : d_start..d_end {
+            if length % 2 != 0 then continue;
+            pattern := length / 2;
+            repeat := 2;
+            first_gaulois += sum_of_repeating_pattern(start, end, pattern, repeat);
+        }
+
+        // part 2
+        for length : d_start..d_end {
+            sums : [5]s64;
+            for pattern: 1..length/2 {
+                if length%pattern != 0 then continue;
+                repeat := length / pattern;
+                sum := sum_of_repeating_pattern(start, end, pattern, repeat);
+                for factor: 1..pattern-1 {
+                    if pattern % factor != 0 then continue;
+                    sum -= sums[factor-1];
+                }
+                sums[pattern-1] = sum;
+                second_gaulois += sum;
             }
         }
 
-        idx := lower_bound(numbers, start);
-        while numbers[idx] <= end {
-            second_gaulois += numbers[idx];
-            idx += 1;
-        }
     }
 
     return sprint("%", first_gaulois), sprint("%", second_gaulois);
