@@ -9,15 +9,18 @@
 #load "d01.jai";
 #load "d02.jai";
 #load "d03.jai";
+#load "d04.jai";
 
 main :: () {
     days := (()->(string,string)).[
         d01,
         d02,
         d03,
+        d04,
     ];
 
-    iter :: 20;
+    iter :: 50;
+    total : float64 = 0.0;
 
     context.allocator = temp;
     for day_fn : days {
@@ -42,6 +45,11 @@ main :: () {
             reset_temporary_storage();
         }
 
-        print("%ms\n", acc_time / iter);
+        day_time := acc_time / iter;
+        print("%ms\n", day_time);
+
+        total += day_time;
     }
+
+    print("total: %ms\n", total);
 }
