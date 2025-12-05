@@ -10,6 +10,7 @@
 #load "d02.jai";
 #load "d03.jai";
 #load "d04.jai";
+#load "d05.jai";
 
 main :: () {
     days := (()->(string,string)).[
@@ -17,6 +18,7 @@ main :: () {
         d02,
         d03,
         d04,
+        d05,
     ];
 
     iter :: 50;
