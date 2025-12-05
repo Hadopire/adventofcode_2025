@@ -1,6 +1,10 @@
+#scope_file
+
 mod :: (a: s32, b: s32) -> s32 {
     return (a%b+b)%b;
 }
+
+#scope_export
 
 d01 :: () -> string, string {
     input, _ := read_entire_file("d01.txt");

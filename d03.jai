@@ -1,3 +1,5 @@
+#scope_file
+
 next_line :: (str: *string) -> string {
     _, line:, <<str = split_from_left(<<str, #char "\n");
     return line;
@@ -27,6 +29,8 @@ joltage :: (l: string, n: s64) -> s64 {
 
     return joltage;
 }
+
+#scope_export
 
 d03 :: () -> string, string {
     input, _ := read_entire_file("d03.txt");

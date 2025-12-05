@@ -1,3 +1,5 @@
+#scope_file
+
 count_digits :: (n: s64) -> s64 {
     if n < 10 then return 1;
     if n < 100 then return 2;
@@ -38,6 +40,8 @@ sum_of_repeating_pattern :: (min_value: s64, max_value: s64, length: s64, repeat
 
     return ((n * (a1 + an)) / 2) * m;
 }
+
+#scope_export
 
 d02 :: () -> string, string {
     input, _ := read_entire_file("d02.txt");
