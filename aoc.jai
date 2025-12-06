@@ -6,11 +6,16 @@
 #import "IntroSort";
 #import "String";
 
+split_lines :: (s: string) -> [] string {
+    return split(s, cast(u8) #char "\n");
+}
+
 #load "d01.jai";
 #load "d02.jai";
 #load "d03.jai";
 #load "d04.jai";
 #load "d05.jai";
+#load "d06.jai";
 
 main :: () {
     days := (()->(string,string)).[
@@ -19,6 +24,7 @@ main :: () {
         d03,
         d04,
         d05,
+        d06,
     ];
 
     iter :: 50;
