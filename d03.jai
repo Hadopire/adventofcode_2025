@@ -1,10 +1,5 @@
 #scope_file
 
-next_line :: (str: *string) -> string {
-    _, line:, <<str = split_from_left(<<str, #char "\n");
-    return line;
-}
-
 highest_digit :: (str: string) -> s64, s64 {
     highest_idx := 0;
     highest := 0;

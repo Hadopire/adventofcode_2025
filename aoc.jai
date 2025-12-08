@@ -6,6 +6,11 @@
 #import "IntroSort";
 #import "String";
 
+next_line :: (str: *string) -> string {
+    _, line:, <<str = split_from_left(<<str, #char "\n");
+    return line;
+}
+
 split_lines :: (s: string) -> [] string {
     return split(s, cast(u8) #char "\n");
 }
@@ -29,7 +34,7 @@ main :: () {
         d07,
     ];
 
-    iter :: 1000;
+    iter :: 50;
     total : float64 = 0.0;
 
     context.allocator = temp;
