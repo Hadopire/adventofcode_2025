@@ -22,6 +22,7 @@ split_lines :: (s: string) -> [] string {
 #load "d05.jai";
 #load "d06.jai";
 #load "d07.jai";
+#load "d08.jai";
 
 main :: () {
     days := (()->(string,string)).[
@@ -32,9 +33,10 @@ main :: () {
         d05,
         d06,
         d07,
+        d08,
     ];
 
-    iter :: 50;
+    iter :: 100;
     total : float64 = 0.0;
 
     context.allocator = temp;
