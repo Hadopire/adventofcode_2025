@@ -23,6 +23,7 @@ split_lines :: (s: string) -> [] string {
 #load "d06.jai";
 #load "d07.jai";
 #load "d08.jai";
+#load "d09.jai";
 
 main :: () {
     days := (()->(string,string)).[
@@ -34,6 +35,7 @@ main :: () {
         d06,
         d07,
         d08,
+        d09,
     ];
 
     iter :: 100;
