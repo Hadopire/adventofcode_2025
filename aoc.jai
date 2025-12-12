@@ -110,13 +110,16 @@ main :: () {
         a : string;
         b : string;
 
+        printed := 0;
         for 1..iter {
             before := current_time_monotonic();
             a, b = day_fn();
             after := current_time_monotonic();
 
             if it == 1 {
-                print("d% part_1: % - part_2: % - ", formatInt(day_n, minimum_digits = 2), a, b);
+                printed = print("d% part_1: %", formatInt(day_n, minimum_digits = 2), a);
+                for 0..max(1, 28 - printed) print(" ");
+                printed = print("part_2: %", b);
             }
 
             us, _ := to_microseconds(after - before);
@@ -127,10 +130,12 @@ main :: () {
         }
 
         day_time := acc_time / iter;
-        print("%ms\n", day_time);
+
+        for 0..max(1, 28 - printed) print(" ");
+        print("%ms\n", formatFloat(day_time, 6, 3, zero_removal = FormatFloat.Zero_Removal.NO));
 
         total += day_time;
     }
 
-    print("total: %ms\n", total);
+    print("     TOTAL:                                               %ms\n", total);
 }
