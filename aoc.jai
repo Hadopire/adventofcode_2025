@@ -82,6 +82,7 @@ queue_clear :: (queue: *Queue($T)) {
 #load "d09.jai";
 #load "d10.jai";
 #load "d11.jai";
+#load "d12.jai";
 
 main :: () {
     days := (()->(string,string)).[
@@ -96,6 +97,7 @@ main :: () {
         d09,
         d10,
         d11,
+        d12,
     ];
 
     iter :: 100;
